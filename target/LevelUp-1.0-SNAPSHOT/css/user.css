@@ -1,0 +1,120 @@
+.app {
+    display: flex;
+    flex-flow: nowrap;
+}
+
+header {
+    background-color: var(--shade3);
+    padding: .5rem;
+}
+
+.links {
+    flex: 1;
+}
+
+.links a, .usr svg {
+    color: white;
+    text-decoration: none;
+    padding: .1rem;
+    margin: 0 .4rem;
+}
+
+.links a:hover, .usr svg:hover {
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: var(--shade2);
+    flex-basis: 20px;
+}
+
+.menu > a {
+    text-decoration: none;
+    color: white;
+    padding: .5rem 1rem;
+}
+
+.menu > a:hover, .menu > a:focus {
+    color: black;
+    background-color: white;
+}
+
+.content {
+    background: linear-gradient(0.25turn, var(--shade2), lightgrey, var(--shade2));
+    flex: 1;
+    flex-wrap: nowrap;
+    height: inherit;
+    overflow-y: auto;
+    /*margin: auto;*/
+}
+
+.cardbody{
+    background-color: lightgrey;
+    color: black;
+    border-radius: 5px;
+    height: 47vh;
+    width: 70vw;
+    min-height: 47vh;
+    min-width: 70vw;
+    margin-top: 5vh;
+    margin-right: 1vw;
+    margin-left: 27vw;
+}
+
+.cardimage{
+
+}
+
+.body {
+    flex-grow: 1;
+    flex-wrap: nowrap;
+}
+
+
+.body > * {
+    margin: 1rem;
+}
+
+
+/*
+.footer * {
+    color: white;
+    background-color: dimgray;
+    text-decoration: none;
+}
+*/
+
+footer {
+    text-align: center;
+    font-weight: normal;
+    font-size: .7rem;
+    padding-right: .3rem;
+    background-color: var(--shade3);
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    padding: .15rem;
+}
+
+.info {
+    flex: 1;
+}
+
+/*
+.footer{
+    min-height: 20vh;
+    background-color: var(--shade3);
+    margin-top: auto;
+}
+
+.footer > div > a {
+    color: white;
+    text-decoration: none;
+}
+*/

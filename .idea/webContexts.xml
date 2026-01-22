@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/adminIndex.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults/inspectCorso.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults/inspectOrdine.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults/inspectUser.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/inspectResults" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/showAllResults/showAllCorso.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/showAllResults" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/logging/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/logging" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/partials/head.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/partials" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/partials/home/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/partials/home" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results/inspectOrdine.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results/showAllPublished.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results/showAllSubscribed.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/results" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/userprofile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+      </map>
+    </option>
+  </component>
+</project>

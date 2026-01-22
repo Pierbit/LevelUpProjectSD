@@ -1,0 +1,86 @@
+.app {
+    display: flex;
+    flex-flow: nowrap;
+}
+
+.topbar {
+    background-color: var(--shade3);
+    padding: .5rem;
+}
+
+header > * {
+    margin: .5rem;
+}
+
+.navbar {
+    background-color: var(--shade2);
+    border-radius: 0 0 5px 5px;
+    flex-basis: 20px;
+}
+
+.menu > a {
+    text-decoration: none;
+    color: white;
+    padding: .5rem 1rem;
+}
+
+.menu > a:hover, .menu > a:focus {
+    color: black;
+    background-color: white;
+}
+
+.content {
+    background-color: lightgrey;
+    flex: 1;
+    flex-wrap: nowrap;
+    height: inherit;
+    overflow: auto;
+    /*margin: auto;*/
+}
+
+.info {
+    text-align: right;
+    font-style: italic;
+    font-weight: normal;
+    font-size: .7rem;
+    padding-right: .3rem;
+    background-color: darkgray;
+}
+
+.body {
+    flex-grow: 1;
+    flex-wrap: nowrap;
+}
+
+.body > * {
+    margin: 1rem;
+}
+
+/*
+.topbar > *:first-child {
+    cursor: pointer;
+}
+*/
+
+.topbar > .account {
+    display: none;
+}
+
+.topbar > .command {
+    flex: 1;
+}
+
+.topbar > * {
+    color: white;
+    margin-right: .5rem;
+}
+
+@media screen and (min-width: 769px) {
+    .topbar > .account {
+        display: block;
+    }
+
+    /*.content {
+        margin: initial;
+    }*/
+}

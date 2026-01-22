@@ -1,0 +1,27 @@
+/*.data {
+    margin: 1rem;
+}
+
+.data-table > thead {
+    background-color: var(--shade3);
+    color: white;
+}*/
+
+.create {
+    padding: 1rem;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.body {
+    padding: 1rem .5rem;
+}
+
+.create > * {
+    margin: 3px;
+}
+
+.create textarea {
+    resize: none;
+}
