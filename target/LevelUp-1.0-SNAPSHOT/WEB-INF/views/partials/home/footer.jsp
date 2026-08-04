@@ -1,15 +1,15 @@
 <footer>
     <p class="grid-x align-center justify-center">
         <span class="grid-y info">
-            <a href="footerlink.html">About us</a>
-            <a href="footerlink.html">Gestione dei cookie</a>
-            <a href="footerlink.html">FAQ</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">About us</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">Gestione dei cookie</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">FAQ</a>
         </span>
 
         <span class="grid-y info">
-            <a href="footerlink.html">Terms</a>
-            <a href="footerlink.html">Contattaci</a>
-            <a href="footerlink.html">Privacy</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">Terms</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">Contattaci</a>
+            <a href="${pageContext.request.contextPath}/footerlink.html">Privacy</a>
         </span>
     </p>
 

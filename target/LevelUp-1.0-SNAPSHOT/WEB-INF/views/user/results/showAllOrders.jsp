@@ -6,16 +6,18 @@
 <head>
     <jsp:include page="../../partials/head.jsp">
         <jsp:param name="title" value="Ordini effettuati"/>
-        <jsp:param name="styles" value="admin.css,showAll.css"/>
+        <jsp:param name="styles" value="admin.css,showAll.css,user.css"/>
+        <jsp:param name="scripts" value="home.js"/>
     </jsp:include>
 </head>
-<body>
+<body onload="loadCategorie()">
 <%
     ArrayList<Ordine> listaordini = (ArrayList<Ordine>) request.getAttribute("ordinieffettuati");
 %>
 <main class="app">
     <section class="content grid-y">
-        <%@include file="../../partials/user/header.jsp" %>
+        <%@include file="/WEB-INF/views/partials/home/header.jsp"%>
+        <%@include file="/WEB-INF/views/partials/home/categoriebar.jsp"%>
         <div class="body grid-y justify-center align-center">
             <table class="table data-table">
                 <caption>Ordini effettuati</caption>
@@ -54,6 +56,7 @@
                 <jsp:param name="resource" value="${pageContext.request.contextPath}/user/showAllOrders"/>
             </jsp:include>
         </div>
+        <%@include file="/WEB-INF/views/partials/home/footer.jsp"%>
     </section>
 </main>
 </body>

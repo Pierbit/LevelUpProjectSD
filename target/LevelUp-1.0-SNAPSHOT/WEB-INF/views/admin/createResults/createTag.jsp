@@ -4,7 +4,7 @@
 <head>
     <jsp:include page="../../partials/head.jsp">
         <jsp:param name="title" value="Crea un nuovo tag"/>
-        <jsp:param name="styles" value="admin.css,showAll.css"/>
+        <jsp:param name="styles" value="user.css,admin.css,showAll.css"/>
         <jsp:param name="scripts" value="admin.js,validators.js"/>
     </jsp:include>
 </head>
@@ -20,19 +20,22 @@
             <%@include file="/WEB-INF/views/partials/alert.jsp" %>
         </c:if>
 
-        <div class="body grid-x justify-center">
-            <form action="${pageContext.request.contextPath}/manager/executeCreateTag"
-                  method="post" class="app justify-center align-center">
-                <fieldset class="grid-y cell w50 create">
-                    <h2 id="login" style="text-align: center">Crea un nuovo tag</h2>
-
-                    <label for="nome" class="field">Nome Tag</label> <br>
-                    <input type="text" id="nome" name="nome"> <br>
-                    <p id="namerr" class="err">Il nome del tag deve essere 3-30 caratteri e non può contenere
-                        caratteri speciali o spazi.</p> <br>
-                    <button type="submit" class="btn primary" onclick="return TagValidate()">Crea</button>
-                </fieldset>
-            </form>
+        <div class="body grid-y align-center">
+            <div class="box">
+                <div class="container">
+                    <h2 style="text-align: center">Crea un nuovo tag</h2>
+                    <form action="${pageContext.request.contextPath}/manager/executeCreateTag"
+                          method="post" class="grid-x justify-center">
+                        <div class="grid-y cell w80 logging">
+                            <label for="nome" class="field">Nome Tag</label> <br>
+                            <input type="text" id="nome" name="nome"> <br>
+                            <p id="namerr" class="err">Il nome del tag deve essere 3-30 caratteri e non può contenere
+                                caratteri speciali o spazi.</p> <br>
+                            <button type="submit" class="btn primary" onclick="return TagValidate()">Crea</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 </main>

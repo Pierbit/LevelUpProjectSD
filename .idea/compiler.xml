@@ -9,8 +9,5 @@
         <module name="LevelUp" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="LevelUp" target="14" />
-    </bytecodeTargetLevel>
   </component>
 </project>

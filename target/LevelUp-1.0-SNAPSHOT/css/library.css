@@ -121,6 +121,10 @@ button.primary:hover {
     filter: brightness(110%);
 }
 
+textarea {
+    resize: none;
+}
+
 /* Personalizzazione tabelle */
 /*
 .table {

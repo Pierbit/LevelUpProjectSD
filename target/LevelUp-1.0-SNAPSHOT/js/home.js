@@ -1,5 +1,6 @@
 function loadCategorie() {
     const xhttp = new XMLHttpRequest();
+    const path = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === XMLHttpRequest.DONE) {
             if (xhttp.status >= 100 && xhttp.status < 400) {
@@ -10,7 +11,7 @@ function loadCategorie() {
 
                     let link = document.createElement("a");
                     link.innerHTML = lista.categorie[i].nome;
-                    link.href = "/LevelUp_war_exploded/home/browseCorsi?categoria="+lista.categorie[i].nome;
+                    link.href = path+"/home/browseCorsi?categoriaName="+lista.categorie[i].nome;
                     link.className = "generatedlink";
                     document.getElementById("categoriebar").appendChild(link);
                 }
@@ -20,14 +21,14 @@ function loadCategorie() {
                 for (let i = 0; i < Object.keys(defaultcategorie).length; i++) {
                     let link = document.createElement("a");
                     link.innerHTML = defaultcategorie[i];
-                    link.href = "/LevelUp_war_exploded/home/browseCorsi?categoria="+defaultcategorie[i];
+                    link.href = path+"/home/browseCorsi?categoriaName="+defaultcategorie[i];
                     link.className = "generatedlink";
                     document.getElementById("categoriebar").appendChild(link);
                 }
             }
         }
     }
-    xhttp.open("GET", "/LevelUp_war_exploded/home/loadCategorie", true);
+    xhttp.open("GET", path+"/home/loadCategorie", true);
     xhttp.send();
 }
 

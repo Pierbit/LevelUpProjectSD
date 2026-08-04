@@ -5,7 +5,7 @@
     <head>
         <jsp:include page="../partials/head.jsp">
             <jsp:param name="title" value="Pagina amministrazione"/>
-            <jsp:param name="styles" value="admin.css"/>
+            <jsp:param name="styles" value="admin.css,user.css"/>
             <jsp:param name="scripts" value="admin.js"/>
         </jsp:include>
 
@@ -43,7 +43,7 @@
                 <div class="body grid-x justify-center">
                 </div>
 
-                <%@include file="../partials/admin/footer.jsp"%>
+                <%@include file="/WEB-INF/views/partials/home/footer.jsp"%>
             </section>
         </main>
     </body>

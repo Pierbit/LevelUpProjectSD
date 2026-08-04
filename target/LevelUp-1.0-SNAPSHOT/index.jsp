@@ -1,7 +1,8 @@
 <%@ page import="model.categoria.Categoria" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.corso.Corso" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,33 +18,6 @@
                 width: 100%;
                 position: relative;
                 margin: auto;
-            }
-
-            /* Next & previous buttons */
-            .prev, .next {
-                cursor: pointer;
-                position: absolute;
-                top: 50%;
-                width: auto;
-                padding: 16px;
-                margin-top: -22px;
-                color: white;
-                font-weight: bold;
-                font-size: 18px;
-                transition: 0.6s ease;
-                border-radius: 0 3px 3px 0;
-                user-select: none;
-            }
-
-            /* Position the "next button" to the right */
-            .next {
-                right: 0;
-                border-radius: 3px 0 0 3px;
-            }
-
-            /* On hover, add a black background color with a little bit see-through */
-            .prev:hover, .next:hover {
-                background-color: rgba(0,0,0,0.8);
             }
 
             /* Caption text */
@@ -77,7 +51,7 @@
 
             /* On smaller screens, decrease text size */
             @media only screen and (max-width: 300px) {
-                .prev, .next,.text {font-size: 11px}
+                .text {font-size: 11px}
             }
 
             .text > * {
@@ -85,28 +59,6 @@
                 background-color: hsla(0,0%,0%,0.5);
                 padding: .5rem;
                 border-radius: 5px;
-            }
-
-            /* Card */
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-                transition: 0.3s;
-                width: 20rem;
-                background-color: var(--shade3);
-            }
-
-            .card a {
-                color: white;
-                text-decoration: none;
-            }
-
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-                cursor: pointer;
-            }
-
-            .container {
-                padding: 2px 16px;
             }
 
             .body {
@@ -141,22 +93,11 @@
                             <h1>Supera i tuoi limiti!</h1>
                         </div>
                     </div>
-
-                    <!--
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    -->
                 </div>
 
                 <script>
                     var slideIndex = 1;
                     showSlides(slideIndex);
-
-                    /*
-                    function plusSlides(n) {
-                        showSlides(slideIndex += n);
-                    }
-                    */
 
                     function plusSlides() {
                         showSlides(slideIndex += 1);
@@ -175,16 +116,57 @@
                 </script>
 
                 <div class="body grid-x justify-center align-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="https://i.ytimg.com/vi/Teg70xwkX4I/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD5oWzX8GNYKE9SpbtwHgIE0godRQ" alt="card" style="width:100%">
-                            <div class="container">
-                                <h4><b>Come sviluppare una bestemmia creativa</b></h4>
-                                <p>di germano_mosconi_666</p>
-                            </div>
-                        </a>
-                    </div>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="3"/>
+                        <jsp:param name="cover" value="2021-07-26 22.10.16.314 hacking.jpg"/>
+                        <jsp:param name="title" value="How to become an hacker"/>
+                        <jsp:param name="user" value="hackerino33"/>
+                        <jsp:param name="price" value="50"/>
+                    </jsp:include>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="4"/>
+                        <jsp:param name="cover" value="2021-07-26 22.15.36.867 cool-guy-wallpaper-1280x720_45.jpg"/>
+                        <jsp:param name="title" value="How to be cool"/>
+                        <jsp:param name="user" value="bigchad1"/>
+                        <jsp:param name="price" value="75"/>
+                    </jsp:include>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="14"/>
+                        <jsp:param name="cover" value="2021-07-26 22.39.27.671 chess.jpg"/>
+                        <jsp:param name="title" value="How to improve at chess"/>
+                        <jsp:param name="user" value="therealL"/>
+                        <jsp:param name="price" value="12.25"/>
+                    </jsp:include>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="10"/>
+                        <jsp:param name="cover" value="2021-07-26 22.29.10.022 gaming.jpg"/>
+                        <jsp:param name="title" value="How to build a gaming PC"/>
+                        <jsp:param name="user" value="hackerino33"/>
+                        <jsp:param name="price" value="70.5"/>
+                    </jsp:include>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="7"/>
+                        <jsp:param name="cover" value="2021-07-26 22.20.57.884 football.jpg"/>
+                        <jsp:param name="title" value="How to play football"/>
+                        <jsp:param name="user" value="bigchad1"/>
+                        <jsp:param name="price" value="26.25"/>
+                    </jsp:include>
+
+                    <jsp:include page="/WEB-INF/views/partials/cards/corso.jsp">
+                        <jsp:param name="id" value="6"/>
+                        <jsp:param name="cover" value="2021-07-26 22.19.11.447 basket.jpg"/>
+                        <jsp:param name="title" value="How to play BasketBall"/>
+                        <jsp:param name="user" value="bigchad1"/>
+                        <jsp:param name="price" value="60.5"/>
+                    </jsp:include>
+
                 </div>
+
                 <%@include file="WEB-INF/views/partials/home/footer.jsp"%>
             </section>
         </main>

@@ -6,7 +6,7 @@
     <head>
         <jsp:include page="../../partials/head.jsp">
             <jsp:param name="title" value="Ispeziona corso"/>
-            <jsp:param name="styles" value="admin.css,showAll.css"/>
+            <jsp:param name="styles" value="user.css,admin.css,showAll.css"/>
             <jsp:param name="scripts" value="admin.js"/>
         </jsp:include>
     </head>
@@ -28,7 +28,7 @@
                     <%
                         } else {
                     %>
-                        <img src="${pageContext.request.contextPath}/covers/<%=corso.getCopertina()%>">
+                        <img src="${pageContext.request.contextPath}/covers/<%=corso.getCopertina()%>" style="max-width: 90%">
                     <%
                         }
                     %>
@@ -38,15 +38,15 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Prezzo Base</th>
-                            <th>Testo</th>
                         </tr>
                         <tr>
                             <td><%=corso.getId()%></td>
                             <td><%=corso.getNome()%></td>
                             <td><%=corso.getPrezzoBase()%>€</td>
-                            <td><%=corso.getTesto()%></td>
                         </tr>
                     </table>
+
+                    <fieldset style="background-color: white; border: 1px solid black; width: 75%"><%=corso.getTesto()%></fieldset>
 
                     <table class="table">
                         <caption>Utenti partecipanti</caption>

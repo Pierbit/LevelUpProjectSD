@@ -5,7 +5,7 @@
     <head>
         <jsp:include page="../../partials/head.jsp">
             <jsp:param name="title" value="Elenco degli utenti"/>
-            <jsp:param name="styles" value="admin.css,showAll.css"/>
+            <jsp:param name="styles" value="user.css,admin.css,showAll.css"/>
             <jsp:param name="scripts" value="admin.js"/>
         </jsp:include>
     </head>
@@ -28,7 +28,6 @@
                             <th>Nickname</th>
                             <th>Email</th>
                             <th>Ispeziona</th>
-                            <th>Aggiorna</th>
                             <th>Elimina</th>
                         </tr>
                         <%
@@ -44,12 +43,6 @@
                                     <input type="submit" value="Ispeziona">
                                 </form>
                             </td>
-                            <td data-head="Aggiorna">
-                                <form action="${pageContext.request.contextPath}/manager/updateUtente" method="post">
-                                    <input type="hidden" name="username" value="<%=utente.getNickname()%>">
-                                    <input type="submit" value="Aggiorna">
-                                </form>
-                            </td>
                             <td data-head="Elimina">
                                 <form action="${pageContext.request.contextPath}/manager/deleteUtente" method="post">
                                     <input type="hidden" name="username" value="<%=utente.getNickname()%>">
@@ -61,10 +54,6 @@
                             }
                         %>
                     </table>
-
-                    <a href="${pageContext.request.contextPath}/manager/createUtente">
-                        Inserisci un nuovo utente.
-                    </a>
 
                     <jsp:include page="/WEB-INF/views/partials/paginator.jsp">
                         <jsp:param name="resource" value="${pageContext.request.contextPath}/manager/showAllUtente"/>

@@ -49,6 +49,7 @@
             padding: 1rem;
             background-color: white;
             border-radius: 5px;
+            border: none;
         }
 
         .logging > * {

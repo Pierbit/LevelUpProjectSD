@@ -1,3 +1,7 @@
+<%@ page import="model.carrello.Carrello" %>
+<%@ page import="model.utente.Utente" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
@@ -34,3 +38,12 @@
         <script src="${context}/js/${script}" defer></script>
     </c:forEach>
 </c:if>
+
+<%
+    if(session.getAttribute("carrello")==null && session.getAttribute("utente")==null){
+        Carrello carrello = new Carrello();
+        carrello.setId((int) (new Date().getTime() / 1000));
+        carrello.setOggetti(new ArrayList<>());
+        session.setAttribute("carrello",carrello);
+    }
+%>

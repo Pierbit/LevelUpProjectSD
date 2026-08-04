@@ -1,125 +1,114 @@
-<%@ page import="model.utente.Utente" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.categoria.Categoria" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.corso.Corso" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
-<head>
-    <jsp:include page="../partials/head.jsp">
-        <jsp:param name="title" value="Profilo utente"/>
-        <jsp:param name="styles" value="user.css"/>
-    </jsp:include>
+    <head>
+        <jsp:include page="../partials/head.jsp">
+            <jsp:param name="title" value="Profilo"/>
+            <jsp:param name="styles" value="user.css"/>
+            <jsp:param name="scripts" value="home.js"/>
+        </jsp:include>
 
-    <script>
-        function isPublisher() {
-            var publisher = document.getElementById("publisher").getAttribute("value");
-            //var justunsub = document.getElementById("unsubbed").getAttribute("value");
-            if (publisher == "false") {
-                document.getElementById("nocontentcreator").style.display = "block";
-            } else {
-                document.getElementById("nocontentcreator").style.display = "none";
+        <style>
+            .identity {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                background-color: var(--shade3);
+                width: 25rem;
             }
-            /*if (justunsub == "true") {
-                document.getElementById("justunsub").style.display = "block";
-            } else {
-                document.getElementById("justunsub").style.display = "none";
-            }*/
 
-        }
-    </script>
-
-    <style>
-        /*
-        body {
-            background: linear-gradient(var(--shade5), var(--shade1));
-        }*/
-
-        .par {
-            background: white;
-            padding: 1rem;
-            margin: .5rem;
-            border-radius: 3px;
-        }
-
-        .head {
-            justify-content: center;
-        }
-
-        .head * {
-            margin: .5rem;
-        }
-
-        .head img {
-            max-width: 300px;
-            max-height: 300px;
-            width: 15rem;
-            max-height: 300px;
-            height: auto;
-        }
-
-        .head h1 {
-            border-bottom: 4px var(--shade3) solid;
-        }
-
-        /*
-        @media only screen and (min-width: 769px) {
-            .head {
-                flex-wrap: nowrap;
-                justify-content: left;
+            .identity > .name-bio {
+                padding: 2px 16px;
+                color: white;
             }
-        }*/
-    </style>
 
-</head>
-<body onload="isPublisher()">
-<main class="app">
+            .name-bio > h4 {
+                text-align: center;
+            }
+
+            .courses {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                background-color: white;
+                width: 90%;
+                padding: .5rem 1rem 2rem;
+                color: black;
+            }
+
+            .courses > h2 {
+                text-align: center;
+            }
+
+            .courses > div > * {
+                margin: .5rem;
+            }
+        </style>
+    </head>
+
+    <body onload="loadCategorie()">
     <%
-        Utente utente = (Utente) session.getAttribute("utente");
+        Utente utente = (Utente) request.getAttribute("utente");
     %>
+        <main class="app">
+            <section class="content grid-y">
+                <%@include file="../partials/home/header.jsp"%>
+                <%@include file="../partials/home/categoriebar.jsp"%>
 
-    <section class="content grid-y">
-        <%@include file="../partials/user/header.jsp"%>
-        <div class="body grid-y justify-center">
-            <div class="par head grid-y justify-center align-center">
-                <%
-                    if ((utente.getFotoProfilo()) == null) {
-                %>
-                <img alt="profilepicture" src="${pageContext.request.contextPath}/images/no_avatar.jpg">
-                <%
-                } else {
-                %>
-                <img alt="profilepicture" src="${pageContext.request.contextPath}/covers/<%=utente.getFotoProfilo()%>">
-                <%
-                    }
-                %>
+                <div class="body grid-y justify-center align-center">
+                    <div class="identity">
+                        <% if (utente.getFotoProfilo() == null) { %>
+                            <img src="${pageContext.request.contextPath}/images/no_avatar.jpg" alt="avatar" style="width:100%">
+                        <% } else { %>
+                            <img src="${pageContext.request.contextPath}/covers/<%=utente.getFotoProfilo()%>" alt="avatar" style="width:100%">
+                        <% } %>
+                        <div class="name-bio">
+                            <h4><b><%=utente.getNickname()%></b></h4>
+                            <% if (utente.getBiografia() != null) { %>
+                                <p><%=utente.getBiografia()%></p>
+                            <% } %>
+                        </div>
+                    </div>
 
-                <div>
-                    <h1><%=utente.getNickname()%></h1>
-                    <%
-                        if (utente.getBiografia() != null) {
-                    %>
-                    <p><%=utente.getBiografia()%></p>
-                    <%
-                        }
-                    %>
+                    <% if (!utente.getCorsiCreati().isEmpty()) { %>
+                        <div class="courses">
+                            <h2>Corsi creati</h2>
+
+                            <div class="grid-x align-center justify-center">
+                                <% for (Corso corso: utente.getCorsiCreati()) { %>
+                                    <jsp:include page="../partials/cards/corso.jsp">
+                                        <jsp:param name="id" value="<%=corso.getId()%>"/>
+                                        <jsp:param name="cover" value="<%=corso.getCopertina()%>"/>
+                                        <jsp:param name="title" value="<%=corso.getNome()%>"/>
+                                        <jsp:param name="user" value="<%=corso.getUtenteCreatore().getNickname()%>"/>
+                                        <jsp:param name="price" value="<%=corso.getPrezzoBase()%>"/>
+                                    </jsp:include>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+
+                    <% if (!utente.getCorsiPartecipati().isEmpty()) { %>
+                        <div class="courses">
+                            <h2>Partecipazioni</h2>
+
+                            <div class="grid-x align-center justify-center">
+                                <% for (Corso corso: utente.getCorsiPartecipati()) { %>
+                                <jsp:include page="../partials/cards/corso.jsp">
+                                    <jsp:param name="id" value="<%=corso.getId()%>"/>
+                                    <jsp:param name="cover" value="<%=corso.getCopertina()%>"/>
+                                    <jsp:param name="title" value="<%=corso.getNome()%>"/>
+                                    <jsp:param name="user" value="<%=corso.getUtenteCreatore().getNickname()%>"/>
+                                    <jsp:param name="price" value="<%=corso.getPrezzoBase()%>"/>
+                                </jsp:include>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
-            </div>
 
-            <div class="par grid-x align-center">
-                <p id="nocontentcreator" style="font-style: italic">
-                    Non hai ancora pubblicato alcun corso...
-                    <a href="${pageContext.request.contextPath}/user/createCorso">
-                        diventa un content creator su levelUp!
-                    </a>
-                </p>
-            </div>
-        </div>
-
-        <!--<div id="justunsub">
-            <p style="font-style: italic">Ti sei disiscritto con successo!</p>
-        </div>-->
-        <%@include file="../partials/user/footer.jsp"%>
-    </section>
-
-    <input type="hidden" id="publisher" name="userPublisher" value="${publisher}">
-    <!--<input type="hidden" id="unsubbed" name="unsubbed" value="${justunsub}">-->
-</main>
-</body>
+                <%@include file="../partials/home/footer.jsp"%>
+            </section>
+        </main>
+    </body>
 </html>

@@ -5,7 +5,7 @@
     <head>
         <jsp:include page="../../partials/head.jsp">
             <jsp:param name="title" value="Elenco dei corsi"/>
-            <jsp:param name="styles" value="admin.css,showAll.css"/>
+            <jsp:param name="styles" value="user.css,admin.css,showAll.css"/>
             <jsp:param name="scripts" value="admin.js"/>
         </jsp:include>
     </head>

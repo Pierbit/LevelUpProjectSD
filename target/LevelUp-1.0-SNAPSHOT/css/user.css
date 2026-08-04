@@ -106,15 +106,67 @@ footer a {
     flex: 1;
 }
 
-/*
-.footer{
-    min-height: 20vh;
+/* Card */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20rem;
     background-color: var(--shade3);
-    margin-top: auto;
 }
 
-.footer > div > a {
+.card a {
     color: white;
     text-decoration: none;
 }
-*/
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.container > h3 {
+    text-align: right;
+}
+
+/* Dropdown bar */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--shade3);
+    border: 1px solid black;
+    border-radius: 3px;
+    color: white;
+    min-width: 13rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: .5rem;
+    text-align: right;
+    right: -100%;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    color: white;
+    padding: .5rem;
+}
+
+.dropdown-content a:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
