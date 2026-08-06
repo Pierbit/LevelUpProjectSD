@@ -42,4 +42,14 @@ public class RegisterValidator {
         }
         return false;
     }
+
+    //@ ensures \result == (username != null && Pattern.matches("^[\\w.!-]{5,20}$", username));
+    static public boolean isValidUsername(String username) {
+        return username != null && Pattern.matches("^[\\w.!-]{5,20}$", username);
+    }
+
+    //@ ensures \result == (password != null && Pattern.matches("^(?=.*[A-Z])[\\w.!-]{8,}$", password));
+    static public boolean isValidPassword(String password) {
+        return password != null && Pattern.matches("^(?=.*[A-Z])[\\w.!-]{8,}$", password);
+    }
 }

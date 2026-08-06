@@ -13,7 +13,9 @@ import java.util.List;
 
 public class Utente {
     //Attributi
+    //@ nullable
     private String nickname, email, password, fotoProfilo, biografia;
+    //@ nullable
     private Boolean manager;
 
     public String getNickname() {
@@ -78,9 +80,13 @@ public class Utente {
     }
 
     //Relazioni
+    //@ nullable
     private List<Tag> tags;
+    //@ nullable
     private List<Corso> corsiPartecipati, corsiCreati;
+    //@ nullable
     private Carrello carrello;
+    //@ nullable
     private List<Ordine> ordini;
 
     public List<Tag> getTags() {

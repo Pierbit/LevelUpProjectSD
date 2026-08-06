@@ -5,9 +5,11 @@ import model.corso.Corso;
 public class Oggetto {
     //Attributi
     private int id;
-    private double prezzo;
+    //@ public invariant prezzo >= 0;
+    private /*@ spec_public @*/ double prezzo;
 
     //Relazioni
+    //@ nullable
     private Corso corso;
 
     public int getId() {
@@ -18,7 +20,7 @@ public class Oggetto {
         this.id = id;
     }
 
-    public Corso getCorso() {
+    public /*@ nullable @*/ Corso getCorso() {
         return corso;
     }
 
@@ -26,10 +28,11 @@ public class Oggetto {
         this.corso = corso;
     }
 
-    public double getPrezzo() {
+    public /*@ pure @*/ double getPrezzo() {
         return prezzo;
     }
 
+    //@ requires prezzo >= 0;
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }

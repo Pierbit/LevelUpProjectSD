@@ -20,6 +20,9 @@ public class RequestValidator {
 
     public ArrayList<String> getErrors() { return errors; }
 
+    //@ ensures \result == condition;
+    //@ ensures condition ==> errors.size() == \old(errors.size());
+    //@ ensures !condition ==> errors.size() == \old(errors.size()) + 1;
     private boolean gatherError(boolean condition, String message){
         if(condition){
             return true;
@@ -29,7 +32,8 @@ public class RequestValidator {
         }
     }
 
-    private boolean required(String value) { return value != null && !value.isBlank();}
+    //@ ensures \result == (value != null && value.length() > 0);
+    private boolean required(String value) { return value != null && value.length() > 0;}
 
     public boolean assertPresence(boolean ispresent,String msg){
         return gatherError(ispresent,msg);

@@ -60,7 +60,6 @@ public class CorsoSearch implements SearchBuilder {
                     String[] value = request.getParameterValues(param);
                     System.out.println(value.length);
                     for(int i = 0; i < value.length; i++){
-                        System.out.println("diocane");
                         if(value[i]!=null && !value[i].isBlank()) {
                             conditions.add(new Condition("nomeTag", Operator.EQ,value[i],"corsoTag"));
                         }

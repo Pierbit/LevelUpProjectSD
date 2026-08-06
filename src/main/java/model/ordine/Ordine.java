@@ -10,10 +10,13 @@ import java.util.Date;
 public class Ordine {
     //Attributi
     private int id;
+    //@ nullable
     private LocalDate data;
 
     //Relazioni
+    //@ nullable
     private Utente utente;
+    //@ nullable
     private Carrello carrello;
 
     public int getId() {

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 public class Categoria implements JsonSerializable {
     //Attributi
+    //@ nullable
     private String nome;
 
     public String getNome() {

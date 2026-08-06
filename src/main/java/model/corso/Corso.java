@@ -9,9 +9,12 @@ import java.util.List;
 public class Corso {
     //Attributi
     private int id;
+    //@ nullable
     private String nome;
     private double prezzoBase;
+    //@ nullable
     private String testo;
+    //@ nullable
     private String copertina;
 
     public int getId() {
@@ -55,9 +58,13 @@ public class Corso {
     }
 
     //Relazioni
+    //@ nullable
     private Categoria categoria;
+    //@ nullable
     private List<Tag> tags;
+    //@ nullable
     private Utente utenteCreatore;
+    //@ nullable
     private List<Utente> utentiPartecipanti;
 
     public Categoria getCategoria() {

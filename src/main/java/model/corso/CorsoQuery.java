@@ -40,6 +40,8 @@ public class CorsoQuery extends TableQuery {
         return String.format("SELECT corso.* FROM corso, corsoCategoria WHERE corsoCategoria.nomeCategoria=? AND corsoCategoria.idCorso=corso.id");
     }
 
+    //@ requires conditions != null;
+    //@ ensures \result != null;
     public String search(List<Condition> conditions){
 
         String query = "SELECT DISTINCT corso.* FROM corso, utenteCreaCorso, corsoTag, corsoCategoria";

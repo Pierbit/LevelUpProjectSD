@@ -2,6 +2,7 @@ package model.carrello;
 
 import model.oggetto.Oggetto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Carrello {
@@ -9,7 +10,12 @@ public class Carrello {
     private int id;
 
     //Relazioni
-    private List<Oggetto> oggetti;
+    private /*@ spec_public @*/ List<Oggetto> oggetti;
+
+    //@ ensures oggetti != null && oggetti.isEmpty();
+    public Carrello() {
+        this.oggetti = new ArrayList<>();
+    }
 
     public List<Oggetto> getOggetti() {
         return oggetti;
@@ -19,6 +25,9 @@ public class Carrello {
         this.oggetti = oggetti;
     }
 
+    //@ requires oggetti != null;
+    //@ requires oggetto != null;
+    //@ ensures oggetti.size() == \old(oggetti.size()) + 1;
     public void addOggetto(Oggetto oggetto) {
         this.oggetti.add(oggetto);
     }
