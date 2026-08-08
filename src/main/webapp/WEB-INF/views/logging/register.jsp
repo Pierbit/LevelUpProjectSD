@@ -84,7 +84,7 @@
         <div>
             <p>Hai già un account?
                 <a href="${pageContext.request.contextPath}/accounts/login">Accedi</a></p>
-            <a href="${pageContext.request.contextPath}">Torna alla home</a>
+            <a href="${pageContext.request.contextPath}/">Torna alla home</a>
         </div>
     </fieldset>
 </form>

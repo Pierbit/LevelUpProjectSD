@@ -61,7 +61,7 @@
                     <h2 style="text-align: center">Il corso è stato registrato con successo!</h2> <br>
                     <h3 style="text-align: center">In seguito all'approvazione dell'amministratore il corso comprarirà nella sezione <span style="color: #5B00B5">Esplora</span></h3>
                     <h4 style="text-align: center">Puoi visualizzare i corsi che hai pubblicato sul profilo personale</h4>
-                    <form action="${pageContext.request.contextPath}">
+                    <form action="${pageContext.request.contextPath}/">
                         <button class="btn primary">Torna alla home</button>
                     </form>
                 </div>

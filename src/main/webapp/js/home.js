@@ -1,6 +1,7 @@
 function loadCategorie() {
     const xhttp = new XMLHttpRequest();
-    const path = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    //const path = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    const path = "";
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === XMLHttpRequest.DONE) {
             if (xhttp.status >= 100 && xhttp.status < 400) {

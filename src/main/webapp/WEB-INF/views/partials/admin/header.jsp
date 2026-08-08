@@ -1,6 +1,6 @@
 <header class="topbar grid-x align-center">
     <span class="home-button" style="cursor:pointer;">
-        <a href="${pageContext.request.contextPath}">
+        <a href="${pageContext.request.contextPath}/">
             <%@include file="../../../../icons/home.svg"%>
         </a>
     </span>

@@ -1,7 +1,7 @@
 <%@ page import="model.utente.Utente" %>
 <header class="grid-x align-center menu">
     <div class="links grid-x">
-        <div><a href="${pageContext.request.contextPath}">Home</a></div>
+        <div><a href="${pageContext.request.contextPath}/">Home</a></div>
         <div><a class="sidebar-switch">Esplora</a></div>
         <% if (session.getAttribute("utente") != null) { %>
             <div><a href="${pageContext.request.contextPath}/home/publish">Pubblica</a></div>

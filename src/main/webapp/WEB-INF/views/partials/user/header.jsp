@@ -1,7 +1,7 @@
 <%@ page import="model.utente.Utente" %>
 <header class="grid-x align-center menu">
     <span class="links">
-        <span><a href="${pageContext.request.contextPath}">Home</a></span>
+        <span><a href="${pageContext.request.contextPath}/">Home</a></span>
         <span><a class="sidebar-switch">Esplora</a></span>
         <span><a href="${pageContext.request.contextPath}/home/publish">Pubblica</a></span>
 

@@ -56,7 +56,7 @@
                 <div>
                     <p>Non sei ancora un membro?
                         <a href="${pageContext.request.contextPath}/accounts/register">Iscriviti subito</a></p>
-                    <a href="${pageContext.request.contextPath}">Torna alla home</a>
+                    <a href="${pageContext.request.contextPath}/">Torna alla home</a>
                 </div>
             </fieldset>
         </form>

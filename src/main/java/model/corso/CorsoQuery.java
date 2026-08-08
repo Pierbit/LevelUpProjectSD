@@ -106,7 +106,7 @@ public class CorsoQuery extends TableQuery {
 
     public String dropUtentePartecipante() { return String.format("DELETE FROM utentePartecipaCorso WHERE idCorso=? AND nicknameUtente=?;");}
     public String getUtenteCreatore(){
-        return String.format("SELECT utente.* FROM utenteCreaCorso, utente WHERE idCorso=? AND utenteCreacorso.nicknameUtente=utente.nickname;");
+        return String.format("SELECT utente.* FROM utenteCreaCorso, utente WHERE idCorso=? AND utenteCreaCorso.nicknameUtente=utente.nickname;");
     }
 
     public String dropUtenteCreatore() {
