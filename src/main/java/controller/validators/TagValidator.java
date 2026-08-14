@@ -1,11 +1,9 @@
 package controller.validators;
 
-import controller.components.RequestValidator;
+import controller.RequestValidator;
 import model.storage.ConPool;
 import model.tag.Tag;
 import model.tag.TagManager;
-import model.utente.Utente;
-import model.utente.UtenteManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;

@@ -1,16 +1,9 @@
 package controller;
 
-import controller.components.InvalidRequestException;
-import controller.components.Paginator;
-import controller.components.RequestValidator;
 import controller.validators.CorsoValidator;
-import controller.validators.LoginValidator;
-import controller.validators.RegisterValidator;
 import controller.validators.UpdateUtenteValidator;
 import model.carrello.Carrello;
 import model.carrello.CarrelloManager;
-import model.categoria.Categoria;
-import model.categoria.CategoriaManager;
 import model.corso.Corso;
 import model.corso.CorsoManager;
 import model.oggetto.Oggetto;

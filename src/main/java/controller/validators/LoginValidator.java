@@ -1,9 +1,8 @@
 package controller.validators;
 
-import controller.components.RequestValidator;
+import controller.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.regex.Pattern;
 
 public class LoginValidator {
     static public RequestValidator validateForm(HttpServletRequest request) {

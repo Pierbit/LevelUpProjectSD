@@ -19,11 +19,13 @@ public class CarrelloManager extends Manager implements CarrelloDao{
         try(Connection conn = source.getConnection()){
             try(PreparedStatement ps = conn.prepareStatement(QUERY.selectCarrello())){
                 ps.setInt(1,id);
-                ResultSet rs = ps.getResultSet();
+                //ResultSet rs = ps.getResultSet(); old bugged code
+                ResultSet rs = ps.executeQuery();
                 Carrello c = null;
                 if(rs.next()){
                     c = new Carrello();
-                    c.setId(rs.getInt(id));
+                    //c.setId(rs.getInt(id)); old bugged code
+                    c.setId(rs.getInt("id"));
                 }
                 return c;
             }

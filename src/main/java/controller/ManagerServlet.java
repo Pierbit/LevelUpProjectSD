@@ -1,8 +1,5 @@
 package controller;
 
-import controller.components.InvalidRequestException;
-import controller.components.Paginator;
-import controller.components.RequestValidator;
 import controller.validators.*;
 import model.carrello.Carrello;
 import model.carrello.CarrelloManager;
@@ -41,7 +38,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet(name = "ManagerServlet", value = "/manager/*") @MultipartConfig
 public class ManagerServlet extends HttpServlet {

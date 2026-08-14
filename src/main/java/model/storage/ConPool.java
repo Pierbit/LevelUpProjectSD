@@ -42,7 +42,8 @@ public class ConPool {
 	public static DataSource getDataSource() {
 		if (dataSource == null) {
 			PoolProperties p = new PoolProperties();
-			p.setUrl("jdbc:mysql://db:3306/levelup?serverTimezone=" + TimeZone.getDefault().getID()); //Indirizzo del database
+			String dbHost = System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : "localhost";
+			p.setUrl("jdbc:mysql://" + dbHost + ":3306/levelup?serverTimezone=" + TimeZone.getDefault().getID());
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
 			p.setUsername("root"); //Nome utente
 			p.setPassword("cecceccio"); //Password

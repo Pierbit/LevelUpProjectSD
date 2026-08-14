@@ -1,8 +1,5 @@
 package controller;
 
-import controller.components.Alert;
-import controller.components.InvalidRequestException;
-import controller.components.RequestValidator;
 import controller.validators.LoginValidator;
 import controller.validators.RegisterValidator;
 import model.carrello.Carrello;

@@ -1,14 +1,11 @@
 package controller.validators;
 
-import controller.components.RequestValidator;
+import controller.RequestValidator;
 import model.corso.Corso;
 import model.corso.CorsoManager;
 import model.storage.ConPool;
-import model.utente.Utente;
-import model.utente.UtenteManager;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

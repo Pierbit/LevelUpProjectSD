@@ -1,4 +1,4 @@
-package controller.components;
+package controller;
 
 public class Paginator {
     //@ invariant limit > 0;

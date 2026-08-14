@@ -1,4 +1,4 @@
-package controller.components;
+package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

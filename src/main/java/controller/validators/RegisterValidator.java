@@ -1,8 +1,6 @@
 package controller.validators;
 
-import controller.components.RequestValidator;
-import model.corso.Corso;
-import model.corso.CorsoManager;
+import controller.RequestValidator;
 import model.storage.ConPool;
 import model.utente.Utente;
 import model.utente.UtenteManager;
