@@ -80,6 +80,11 @@ class OggettoManagerTest {
     @Test
     void insertOggettoCarrelloLinksSuccessfully() throws SQLException {
         CarrelloManager carrelloManager = new CarrelloManager(ConPool.getDataSource());
+
+        // Defensive cleanup in case a previous run failed partway through
+        manager.deleteOggetoCarrello(TEST_ID);
+        carrelloManager.deleteCarrello(333333);
+
         Carrello carrello = new Carrello();
         carrello.setId(333333);
         carrelloManager.createCarrello(carrello);

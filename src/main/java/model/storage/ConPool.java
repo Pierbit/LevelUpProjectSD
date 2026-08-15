@@ -46,7 +46,11 @@ public class ConPool {
 			p.setUrl("jdbc:mysql://" + dbHost + ":3306/levelup?serverTimezone=" + TimeZone.getDefault().getID());
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
 			p.setUsername("root"); //Nome utente
-			p.setPassword("cecceccio"); //Password
+			String dbPassword = System.getenv("DB_PASSWORD");
+			if (dbPassword == null) {
+				throw new IllegalStateException("DB_PASSWORD environment variable is not set");
+			}
+			p.setPassword(dbPassword);
 			p.setMaxActive(100);
 			p.setInitialSize(10);
 			p.setMinIdle(10);

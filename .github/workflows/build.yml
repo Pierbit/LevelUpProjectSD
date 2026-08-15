@@ -10,7 +10,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: cecceccio
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
           MYSQL_DATABASE: levelup
         ports:
           - 3306:3306
@@ -31,8 +31,8 @@ jobs:
 
       - name: Load schema and seed data into MySQL
         run: |
-          mysql -h127.0.0.1 -uroot -pcecceccio levelup < db-init/schema.sql
-          mysql -h127.0.0.1 -uroot -pcecceccio levelup < db-init/seed.sql
+          mysql -h127.0.0.1 -uroot -p${{ secrets.DB_PASSWORD }} levelup < db-init/schema.sql
+          mysql -h127.0.0.1 -uroot -p${{ secrets.DB_PASSWORD }} levelup < db-init/seed.sql
 
       - name: Build with Maven
         run: mvn clean package
@@ -44,9 +44,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: GitGuardian full history scan
+      - name: GitGuardian scan
         run: |
           pip install ggshield
-          ggshield secret scan repo .
+          ggshield secret scan path . --recursive
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
