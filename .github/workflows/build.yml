@@ -64,7 +64,10 @@ jobs:
           java-version: '16'
           distribution: 'temurin'
 
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Run Snyk test
+        run: snyk test --file=pom.xml
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
