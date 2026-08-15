@@ -5,12 +5,34 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: cecceccio
+          MYSQL_DATABASE: levelup
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 16
         uses: actions/setup-java@v4
         with:
           java-version: '16'
           distribution: 'temurin'
+
+      - name: Load schema and seed data into MySQL
+        run: |
+          mysql -h127.0.0.1 -uroot -pcecceccio levelup < db-init/schema.sql
+          mysql -h127.0.0.1 -uroot -pcecceccio levelup < db-init/seed.sql
+
       - name: Build with Maven
         run: mvn clean package

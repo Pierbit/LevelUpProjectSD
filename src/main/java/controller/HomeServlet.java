@@ -40,7 +40,7 @@ import java.util.List;
 
 @WebServlet(name = "HomeServlet", value = "/home/*")
 public class HomeServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
