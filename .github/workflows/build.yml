@@ -52,3 +52,19 @@ jobs:
           ggshield secret scan path . --recursive
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
+  snyk-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v4
+        with:
+          java-version: '16'
+          distribution: 'temurin'
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
