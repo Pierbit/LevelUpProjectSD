@@ -44,7 +44,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: GitGuardian scan
-        uses: GitGuardian/ggshield-action@v1.34.0
+      - name: GitGuardian full history scan
+        run: |
+          pip install ggshield
+          ggshield secret scan repo .
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
