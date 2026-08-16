@@ -75,20 +75,28 @@ public class AccountServlet extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
-        switch (path) {
-            case "/":
-                break;
-            case "/register":
-                handleRegister(request, response);
-                break;
-            case "/login":
-                handleLogin(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Operazione non consentita");
+        try {
+            switch (path) {
+                case "/":
+                    break;
+                case "/register":
+                    handleRegister(request, response);
+                    break;
+                case "/login":
+                    handleLogin(request, response);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Operazione non consentita");
+            }
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore interno");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 
