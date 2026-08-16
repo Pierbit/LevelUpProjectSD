@@ -75,7 +75,7 @@ public class AccountServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
         switch (path) {
@@ -135,21 +135,9 @@ public class AccountServlet extends HttpServlet {
                 }
                 UtenteManager service = new UtenteManager(ConPool.getDataSource());
                 String username = request.getParameter("username");
-                String temp = request.getParameter("password");
-                String password = null;
+                String password = request.getParameter("password");
+
                 Utente user = null;
-
-
-                try {
-                    MessageDigest digest =
-                            MessageDigest.getInstance("SHA-1");
-                    digest.reset();
-                    digest.update(temp.getBytes(StandardCharsets.UTF_8));
-                    password = String.format("%040x", new
-                            BigInteger(1, digest.digest()));
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                }
 
                 try {
                     user = service.fetchUtente(username);
@@ -168,7 +156,7 @@ public class AccountServlet extends HttpServlet {
                     return;
                 } else {
                     String pass = user.getPassword();
-                    if (password.equals(pass)) {
+                    if (org.mindrot.jbcrypt.BCrypt.checkpw(password, pass)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("utente", user);
                         try {

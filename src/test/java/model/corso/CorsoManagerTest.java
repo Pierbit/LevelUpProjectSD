@@ -1,6 +1,7 @@
 package model.corso;
 
 import model.storage.ConPool;
+import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import controller.search.Condition;
@@ -150,5 +151,26 @@ class CorsoManagerTest {
         List<Corso> results = manager.search(conditions);
 
         assertTrue(results.stream().noneMatch(c -> c.getId() == id));
+    }
+
+    //Testing deleteUtentiPartecipanti removes all participant links for a course
+    @Test
+    void deleteUtentiPartecipantiRemovesAllParticipants() throws SQLException {
+        Corso corso = new Corso();
+        corso.setNome(TEST_NOME);
+        corso.setPrezzoBase(15.00);
+        corso.setTesto("temp");
+        corso.setCopertina(null);
+        manager.createCorso(corso);
+        int id = manager.fetchCorsoId(TEST_NOME);
+
+        manager.insertPartecipante("marcorossi", id);
+        manager.insertPartecipante("giuliabianchi", id);
+
+        boolean deleted = manager.deleteUtentiPartecipanti(id);
+        assertTrue(deleted);
+
+        List<Utente> remaining = manager.fetchUtentiPartecipanti(id);
+        assertTrue(remaining.isEmpty());
     }
 }

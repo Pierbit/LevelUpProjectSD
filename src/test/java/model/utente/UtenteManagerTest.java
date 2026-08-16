@@ -112,4 +112,20 @@ class UtenteManagerTest {
         int after = manager.countUtenti();
         assertEquals(before + 1, after);
     }
+
+    //Testing that a bcrypt-hashed password can be stored and fetched back and still work
+    @Test
+    void hashedPasswordSurvivesRoundTripAndVerifies() throws SQLException {
+        Utente utente = new Utente();
+        utente.setNickname(TEST_NICKNAME);
+        utente.setEmail("bcrypttest@test.com");
+        utente.setPasswordHashed("MyPassword123");
+        utente.setManager(false);
+        manager.createUtente(utente);
+
+        Utente fetched = manager.fetchUtente(TEST_NICKNAME);
+        assertNotNull(fetched);
+        assertTrue(org.mindrot.jbcrypt.BCrypt.checkpw("MyPassword123", fetched.getPassword()));
+    }
+
 }

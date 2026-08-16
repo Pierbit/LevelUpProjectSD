@@ -39,16 +39,7 @@ public class Utente {
     }
 
     public void setPasswordHashed(String password) {
-        try {
-            MessageDigest digest =
-                    MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(password.getBytes(StandardCharsets.UTF_8));
-            this.password = String.format("%040x", new
-                    BigInteger(1, digest.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        this.password = org.mindrot.jbcrypt.BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt());
     }
 
     public void setPassword(String password) {

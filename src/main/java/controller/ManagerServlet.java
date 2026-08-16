@@ -41,7 +41,7 @@ import java.util.List;
 
 @WebServlet(name = "ManagerServlet", value = "/manager/*") @MultipartConfig
 public class ManagerServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Utente admin = (Utente) request.getSession().getAttribute("utente");
         if (admin.getManager()) {
