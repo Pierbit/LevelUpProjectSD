@@ -81,121 +81,129 @@ public class AccountServlet extends HttpServlet {
         switch (path) {
             case "/":
                 break;
-            case "/register": {
-                request.setAttribute("back", "/WEB-INF/views/logging/register.jsp");
-                try {
-                    validate(RegisterValidator.validateForm(request));
-                } catch (InvalidRequestException e) {
-                    e.handle(request, response);
-                }
-                UtenteManager service = new UtenteManager(ConPool.getDataSource());
-                Utente utente = new Utente();
-                utente.setNickname(request.getParameter("username"));
-                utente.setEmail(request.getParameter("email"));
-                utente.setPasswordHashed(request.getParameter("password"));
-                utente.setManager(false);
-                utente.setFotoProfilo("no_avatar.png");
-                CarrelloManager service1 = new CarrelloManager(ConPool.getDataSource());
-                UtenteManager service2 = new UtenteManager(ConPool.getDataSource());
-
-                HttpSession session = request.getSession();
-                Carrello carrello = (Carrello) session.getAttribute("carrello");
-
-                try {
-                    service.createUtente(utente);
-                    service1.createCarrello(carrello);
-
-                    if(carrello.getOggetti() != null){
-                        OggettoManager oggettoManager = new OggettoManager(ConPool.getDataSource());
-                        for(Oggetto o: carrello.getOggetti()) {
-                            oggettoManager.createOggetto(o);
-                            oggettoManager.insertCorsoOggetto(o.getCorso().getId(),o.getId());
-                            oggettoManager.insertOggettoCarrello(o.getId(),carrello.getId());
-                        }
-                    }
-                    service2.setCarrello(utente.getNickname(),carrello.getId());
-                } catch (RuntimeException | SQLException e) {
-                    String errore = "Registrazione non andata a buon fine. " + e.getMessage();
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, errore);
-                    break;
-                }
-                String justreg = "success";
-                request.setAttribute("justreg", justreg);
-                RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/views/logging/login.jsp");
-                dispatcher.forward(request, response);
+            case "/register":
+                handleRegister(request, response);
                 break;
-            }
-            case "/login": {
-                request.setAttribute("back", "/WEB-INF/views/logging/login.jsp");
-                try {
-                    validate(LoginValidator.validateForm(request));
-                } catch (InvalidRequestException e) {
-                    e.handle(request, response);
-                }
-                UtenteManager service = new UtenteManager(ConPool.getDataSource());
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-
-                Utente user = null;
-
-                try {
-                    user = service.fetchUtente(username);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-
-                if (user == null) {
-                    String errore = "Le credenziali sono errate o l'utente non esiste";
-                    ArrayList<String> errors = new ArrayList<>();
-                    errors.add(errore);
-                    request.setAttribute("alert",new Alert(errors,"danger"));
-                    String backPath = "/WEB-INF/views/logging/login.jsp";
-                    response.setStatus(400);
-                    request.getRequestDispatcher(backPath).forward(request,response);
-                    return;
-                } else {
-                    String pass = user.getPassword();
-                    if (org.mindrot.jbcrypt.BCrypt.checkpw(password, pass)) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("utente", user);
-                        try {
-                            Carrello cart = service.fetchCarrello(user.getNickname());
-                            if(cart!=null) {
-                                CarrelloManager carrelloManager = new CarrelloManager(ConPool.getDataSource());
-                                OggettoManager oggettoManger = new OggettoManager(ConPool.getDataSource());
-                                cart.setOggetti(carrelloManager.fetchOggetti(cart.getId()));
-                                for(Oggetto o: cart.getOggetti()){
-                                    o.setCorso(oggettoManger.fetchCorso(o.getId()));
-                                }
-                                session.setAttribute("carrello",cart);
-                            } else{
-                                Carrello c = new Carrello();
-                                c.setId((int) (new Date().getTime() / 1000));
-                                c.setOggetti(new ArrayList<>());
-                                session.setAttribute("carrello",c);
-                            }
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
-                            response.sendError(500,"Errore interno");
-                            return;
-                        }
-                        response.sendRedirect(request.getContextPath());
-                    } else {
-                        String errore = "Le credenziali sono errate o l'utente non esiste";
-                        ArrayList<String> errors = new ArrayList<>();
-                        errors.add(errore);
-                        request.setAttribute("alert",new Alert(errors,"danger"));
-                        String backPath = "/WEB-INF/views/logging/login.jsp";
-                        response.setStatus(400);
-                        request.getRequestDispatcher(backPath).forward(request,response);
-                        return;
-                    }
-                }
+            case "/login":
+                handleLogin(request, response);
                 break;
-            }
             default:
                 response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Operazione non consentita");
+        }
+    }
+
+    private void handleRegister(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute("back", "/WEB-INF/views/logging/register.jsp");
+        try {
+            validate(RegisterValidator.validateForm(request));
+        } catch (InvalidRequestException e) {
+            e.handle(request, response);
+        }
+
+        UtenteManager service = new UtenteManager(ConPool.getDataSource());
+        Utente utente = new Utente();
+        utente.setNickname(request.getParameter("username"));
+        utente.setEmail(request.getParameter("email"));
+        utente.setPasswordHashed(request.getParameter("password"));
+        utente.setManager(false);
+        utente.setFotoProfilo("no_avatar.png");
+
+        HttpSession session = request.getSession();
+        Carrello carrello = (Carrello) session.getAttribute("carrello");
+
+        try {
+            registerUserAndCart(utente, carrello);
+        } catch (RuntimeException | SQLException e) {
+            String errore = "Registrazione non andata a buon fine. " + e.getMessage();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, errore);
+            return;
+        }
+
+        request.setAttribute("justreg", "success");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/logging/login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void registerUserAndCart(Utente utente, Carrello carrello) throws SQLException {
+        UtenteManager service = new UtenteManager(ConPool.getDataSource());
+        CarrelloManager service1 = new CarrelloManager(ConPool.getDataSource());
+
+        service.createUtente(utente);
+        service1.createCarrello(carrello);
+
+        if (carrello.getOggetti() != null) {
+            OggettoManager oggettoManager = new OggettoManager(ConPool.getDataSource());
+            for (Oggetto o : carrello.getOggetti()) {
+                oggettoManager.createOggetto(o);
+                oggettoManager.insertCorsoOggetto(o.getCorso().getId(), o.getId());
+                oggettoManager.insertOggettoCarrello(o.getId(), carrello.getId());
+            }
+        }
+        service.setCarrello(utente.getNickname(), carrello.getId());
+    }
+
+    private void handleLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute("back", "/WEB-INF/views/logging/login.jsp");
+        try {
+            validate(LoginValidator.validateForm(request));
+        } catch (InvalidRequestException e) {
+            e.handle(request, response);
+        }
+
+        UtenteManager service = new UtenteManager(ConPool.getDataSource());
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Utente user = null;
+        try {
+            user = service.fetchUtente(username);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        if (user == null || !org.mindrot.jbcrypt.BCrypt.checkpw(password, user.getPassword())) {
+            rejectLogin(request, response);
+            return;
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("utente", user);
+        try {
+            session.setAttribute("carrello", resolveUserCart(service, user));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            response.sendError(500, "Errore interno");
+            return;
+        }
+        response.sendRedirect(request.getContextPath());
+    }
+
+    private void rejectLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String errore = "Le credenziali sono errate o l'utente non esiste";
+        ArrayList<String> errors = new ArrayList<>();
+        errors.add(errore);
+        request.setAttribute("alert", new Alert(errors, "danger"));
+        response.setStatus(400);
+        request.getRequestDispatcher("/WEB-INF/views/logging/login.jsp").forward(request, response);
+    }
+
+    private Carrello resolveUserCart(UtenteManager service, Utente user) throws SQLException {
+        Carrello cart = service.fetchCarrello(user.getNickname());
+        if (cart != null) {
+            CarrelloManager carrelloManager = new CarrelloManager(ConPool.getDataSource());
+            OggettoManager oggettoManager = new OggettoManager(ConPool.getDataSource());
+            cart.setOggetti(carrelloManager.fetchOggetti(cart.getId()));
+            for (Oggetto o : cart.getOggetti()) {
+                o.setCorso(oggettoManager.fetchCorso(o.getId()));
+            }
+            return cart;
+        } else {
+            Carrello c = new Carrello();
+            c.setId((int) (new Date().getTime() / 1000));
+            c.setOggetti(new ArrayList<>());
+            return c;
         }
     }
 
