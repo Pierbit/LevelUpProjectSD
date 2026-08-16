@@ -2,7 +2,13 @@ package model.oggetto;
 
 import model.corso.Corso;
 
-public class Oggetto {
+import java.io.Serial;
+
+public class Oggetto implements java.io.Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //Attributi
     private int id;
     //@ public invariant prezzo >= 0;

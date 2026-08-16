@@ -3,10 +3,15 @@ package model.categoria;
 import controller.JsonSerializable;
 import org.json.JSONObject;
 
-public class Categoria implements JsonSerializable {
+import java.io.Serial;
+
+public class Categoria implements JsonSerializable, java.io.Serializable {
     //Attributi
     //@ nullable
     private String nome;
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public String getNome() {
         return nome;

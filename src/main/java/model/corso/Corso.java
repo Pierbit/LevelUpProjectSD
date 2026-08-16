@@ -4,9 +4,14 @@ import model.categoria.Categoria;
 import model.tag.Tag;
 import model.utente.Utente;
 
+import java.io.Serial;
 import java.util.List;
 
-public class Corso {
+public class Corso implements java.io.Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //Attributi
     private int id;
     //@ nullable

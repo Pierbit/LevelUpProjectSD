@@ -1,6 +1,12 @@
 package model.tag;
 
-public class Tag {
+import java.io.Serial;
+
+public class Tag implements java.io.Serializable{
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //Attributi
     //@ nullable
     public String nome;

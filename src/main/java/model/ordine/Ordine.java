@@ -4,10 +4,15 @@ import model.carrello.Carrello;
 import model.oggetto.Oggetto;
 import model.utente.Utente;
 
+import java.io.Serial;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Ordine {
+public class Ordine implements java.io.Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //Attributi
     private int id;
     //@ nullable

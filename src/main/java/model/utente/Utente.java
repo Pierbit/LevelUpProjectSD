@@ -5,13 +5,14 @@ import model.corso.Corso;
 import model.ordine.Ordine;
 import model.tag.Tag;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.Serial;
 import java.util.List;
 
-public class Utente {
+public class Utente implements java.io.Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     //Attributi
     //@ nullable
     private String nickname, email, password, fotoProfilo, biografia;
