@@ -14,16 +14,17 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet(name = "AccountServlet", value = "/accounts/*")
 public class AccountServlet extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(AccountServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,11 +92,11 @@ public class AccountServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Operazione non consentita");
             }
         } catch (ServletException | IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to handle request for path: " + path, e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore interno");
             } catch (IOException ioException) {
-                ioException.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to send error response for path: " + path, ioException);
             }
         }
     }
